@@ -3,9 +3,8 @@
 module.exports = {
   url: 'https://blam.dev',
   pathPrefix: '/',
-  title: '',
-  subtitle:
-    'Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu.',
+  title: 'Brainfarts by Blam',
+  subtitle: 'I post things, and talk about stuff',
   copyright: '© All rights reserved.',
   disqusShortname: '',
   postsPerPage: 4,
