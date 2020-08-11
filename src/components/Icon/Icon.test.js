@@ -9,7 +9,7 @@ describe('Icon', () => {
     icon: {
       viewBox: '0 0 0 0',
       path: '',
-    }
+    },
   };
 
   it('renders correctly', () => {

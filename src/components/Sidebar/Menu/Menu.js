@@ -6,8 +6,8 @@ import styles from './Menu.module.scss';
 type Props = {
   menu: {
     label: string,
-    path: string
-  }[]
+    path: string,
+  }[],
 };
 
 const Menu = ({ menu }: Props) => (
