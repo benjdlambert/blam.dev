@@ -86,19 +86,32 @@ const buildCalendar = async (incomingTeamName) => {
         isHomeTeam === matchResultsForTeams.playerListHome ||
         matchResultsForTeams.playerListAway;
 
-      return markdownTable([
-        ['name', '1', '2', '3', '4', 'Series', 'BanP', 'Plats'],
-        ...playerList.map((p) => [
-          p.player,
-          p.result1,
-          p.result2,
-          p.result3,
-          p.result4,
-          p.totalSeries,
-          p.lanePoint,
-          p.place,
-        ]),
-      ]);
+      return (
+        `<table><thead><tr>${[
+          'name',
+          '1',
+          '2',
+          '3',
+          '4',
+          'Series',
+          'BanP',
+          'Plats',
+        ].map((t) => `<th>${t}</th>`)}</tr></thead>` +
+        `<tbody>${playerList
+          .map((p) => [
+            p.player,
+            p.result1,
+            p.result2,
+            p.result3,
+            p.result4,
+            p.totalSeries,
+            p.lanePoint,
+            p.place,
+          ])
+          .map(
+            (row) => `<tr>${row.map((deep) => `<td>${deep}</td>`)}</tr>`
+          )}</tbody></table>`
+      );
     };
 
     const matchResultTable = match.matchHasBeenPlayed
