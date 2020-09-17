@@ -1,12 +1,34 @@
+/* eslint-disable no-await-in-loop */
 const fetch = require('node-fetch');
 const cal = require('ical-generator');
 const moment = require('moment');
+const markdownTable = require('markdown-table');
 
 const normalize = (team) => {
   const withoutSpacesAndHyphens = team.replace(/-|\s/g, '');
   const normalized = withoutSpacesAndHyphens.normalize();
   return normalized.toLowerCase();
 };
+
+class SwebowlClient {
+  apiKey = '';
+
+  baseUrl = '';
+
+  constructor({ baseUrl, apiKey }) {
+    this.apiKey = apiKey;
+    this.baseUrl = baseUrl;
+  }
+
+  get(url) {
+    return fetch(`${this.baseUrl}${url}&APIKey=${this.apiKey}`, {
+      headers: {
+        authority: 'api.swebowl.se',
+        referer: 'https://bits.swebowl.se/seriespel',
+      },
+    }).then((r) => r.json());
+  }
+}
 
 const buildCalendar = async (incomingTeamName) => {
   // first we need an api token which we can extract from the bits homepage
@@ -16,16 +38,13 @@ const buildCalendar = async (incomingTeamName) => {
 
   const [, apiKey] = pageVisitHTMLString.match(/apiKey: "(.+)"/);
 
+  const BitsClient = new SwebowlClient({
+    baseUrl: 'https://api.swebowl.se/api/v1',
+    apiKey,
+  });
   // then we request all games
-  const allGames = await fetch(
-    `https://api.swebowl.se/api/v1/Match?APIKey=${apiKey}&seasonId=2020`,
-    {
-      headers: {
-        authority: 'api.swebowl.se',
-        referer: 'https://bits.swebowl.se/seriespel',
-      },
-    }
-  ).then((r) => r.json());
+
+  const allGames = await BitsClient.get('/Match?seasonId=2020');
 
   const normalizedTeamName = normalize(incomingTeamName);
 
@@ -47,9 +66,45 @@ const buildCalendar = async (incomingTeamName) => {
 
   const calendar = cal({ name: `${teamName}'s Bowling Calendar 2020` });
 
-  console.warn(matches);
+  for (let i = 0; i < matches.length; i += 1) {
+    const match = matches[i];
+    // https:// api.swebowl.se/api/v1/matchResult/GetMatchScores?APIKey=62fcl8gPUMXSQGW1t2Y8mc2zeTk97vbd&matchId=3200970
 
-  matches.forEach((match) => {
+    const buildStatsTable = async (match) => {
+      const matchSchemeId = await BitsClient.get(
+        `/matchResult/GetHeadInfo?id=${match.matchId}`
+      );
+
+      const matchResultsForTeams = await BitsClient.get(
+        `/matchResult/GetMatchResults?matchSchemeId=${matchSchemeId}&matchId=${match.matchId}`
+      );
+
+      const isHomeTeam =
+        normalize(match.matchHomeTeamName) === normalizedTeamName;
+
+      const playerList =
+        isHomeTeam === matchResultsForTeams.playerListHome ||
+        matchResultsForTeams.playerListAway;
+
+      return markdownTable([
+        ['name', '1', '2', '3', '4', 'Series', 'BanP', 'Plats'],
+        ...playerList.map((p) => [
+          p.player,
+          p.result1,
+          p.result2,
+          p.result3,
+          p.result4,
+          p.totalSeries,
+          p.lanePoint,
+          p.place,
+        ]),
+      ]);
+    };
+
+    const matchResultTable = match.matchHasBeenPlayed
+      ? await buildStatsTable(match)
+      : '';
+
     calendar.createEvent({
       start: moment(match.matchDateTime),
       end: moment(match.matchDateTime).add(3, 'hours'),
@@ -59,12 +114,14 @@ const buildCalendar = async (incomingTeamName) => {
         : match.matchVsTeams,
       description: `${
         match.matchHasBeenPlayed
-          ? match.matchVsResult
+          ? `<b>${match.matchVsResult}</b>\n\n${matchResultTable}`
           : match.matchOilPatternName
-      }\n${match.matchHallOnlineScoringUrl}`,
+      }\n<a href="${
+        match.matchHallOnlineScoringUrl
+      }">Live Scoring Available Here</a>`,
       location: match.matchHallName,
     });
-  });
+  }
   // then we return the calendar
   return calendar.toString();
 };
