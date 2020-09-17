@@ -38,6 +38,7 @@
     "disqus"
   ],
   "dependencies": {
+    "bits-bowling-calendar": "^1.0.0",
     "bluebird": "^3.7.2",
     "classnames": "^2.2.6",
     "codecov": "^3.7.1",

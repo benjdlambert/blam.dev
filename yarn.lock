@@ -1535,6 +1535,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@bitauth/libauth@^1.17.1":
+  version "1.17.2"
+  resolved "https://registry.yarnpkg.com/@bitauth/libauth/-/libauth-1.17.2.tgz#8abc0917f03fe1fafb0814c787787e120a74a1c6"
+  integrity sha512-Jo3wFdhtEfJCi9lOPrHJL5Yvk3z68aBWlrf1Y8l4vWFox9rKjWnOnQYOSwwtKvBcd5kg54JrUpolq/H8hSVYLQ==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
@@ -2965,7 +2970,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node-fetch@2":
+"@types/node-fetch@2", "@types/node-fetch@^2.5.7":
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.7.tgz#20a2afffa882ab04d44ca786449a276f9f6bbf3c"
   integrity sha512-o2WVNf5UhWRkxlf6eq+jMZDu7kjgpgJfl4xVNlvryc95O/6F2ld8ztKX+qu+Rjyet93WAWm5LjeX9H5FGkODvw==
@@ -4498,6 +4503,17 @@ bindings@^1.5.0:
   integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
   dependencies:
     file-uri-to-path "1.0.0"
+
+bits-bowling-calendar@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/bits-bowling-calendar/-/bits-bowling-calendar-1.0.0.tgz#2aea3124f4208057c14744c4889a0d4ae7c7732a"
+  integrity sha512-jgkW4D0rl739+dsH8+qcjjCLsLVjtU32/3npgunfhf7jZsRILTDuPmP5hH0QXbIyn/BviF20oZagS8Pwoh6aig==
+  dependencies:
+    "@bitauth/libauth" "^1.17.1"
+    "@types/node-fetch" "^2.5.7"
+    express "^4.17.1"
+    ical-generator "^1.15.0"
+    moment "^2.28.0"
 
 bl@^1.0.0:
   version "1.2.3"
@@ -10554,6 +10570,13 @@ humanize-url@^1.0.0:
     normalize-url "^1.0.0"
     strip-url-auth "^1.0.0"
 
+ical-generator@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/ical-generator/-/ical-generator-1.15.0.tgz#98808c7f4117d84947f5d417ad5acda10da39c62"
+  integrity sha512-UdNOHps1y9GK2/4Mb1eeAlnIqS8cHFOFf1NiCnpzZps+iqyqZn4tQAJJZxt4TjdVkiVCQeKRaaMhTRy4tZEcYQ==
+  dependencies:
+    moment-timezone "^0.5.31"
+
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@~0.4.13:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -13301,6 +13324,18 @@ mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moment-timezone@^0.5.31:
+  version "0.5.31"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.31.tgz#9c40d8c5026f0c7ab46eda3d63e49c155148de05"
+  integrity sha512-+GgHNg8xRhMXfEbv81iDtrVeTcWt0kWmTEY1XQK14dICTXnWJnT0dxdlPspwqF3keKMVPXwayEsk1DI0AA/jdA==
+  dependencies:
+    moment ">= 2.9.0"
+
+"moment@>= 2.9.0", moment@^2.28.0:
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.28.0.tgz#cdfe73ce01327cee6537b0fafac2e0f21a237d75"
+  integrity sha512-Z5KOjYmnHyd/ukynmFd/WwyXHd7L4J9vTI/nn5Ap9AVUgaAE15VvQ9MOGmJJygEUklupqIrFnor/tjTwRU+tQw==
 
 moment@^2.24.0:
   version "2.24.0"
