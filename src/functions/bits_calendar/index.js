@@ -70,10 +70,7 @@ const buildCalendar = async (incomingTeamName) => {
 };
 
 exports.handler = async (event, context, callback) => {
-  console.warn(context);
-  console.warn(event);
-
-  const teamName = normalize('BK-TROL');
+  const [...notNeeded, teamName] = context.path.split('/');
 
   const calendar = await buildCalendar(teamName);
 
@@ -82,6 +79,7 @@ exports.handler = async (event, context, callback) => {
     headers: {
       'Content-Type': 'text/calendar;charset=utf-8',
       'Content-Disposition': 'attachment; filename="calendar.ics"',
+      'Cache-Control': 'public, s-maxage=300',
     },
     body: calendar,
   });
