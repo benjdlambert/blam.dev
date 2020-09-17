@@ -73,9 +73,9 @@ exports.handler = async (event, context, callback) => {
   // const pathSplit = context.path.split('/');
   // const teamName = pathSplit[pathSplit.length - 1];
 
+  console.warn(context);
   console.warn(context.path);
-
-
+  console.warn(JSON.parse(context));
   const teamName = 'matteuspojkarnabkf';
 
   const calendar = await buildCalendar(teamName);
