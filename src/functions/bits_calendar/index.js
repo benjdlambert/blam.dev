@@ -70,8 +70,13 @@ const buildCalendar = async (incomingTeamName) => {
 };
 
 exports.handler = async (event, context, callback) => {
-  const pathSplit = context.path.split('/');
-  const teamName = pathSplit[pathSplit.length - 1];
+  // const pathSplit = context.path.split('/');
+  // const teamName = pathSplit[pathSplit.length - 1];
+
+  console.warn(context.path);
+
+
+  const teamName = 'matteuspojkarnabkf';
 
   const calendar = await buildCalendar(teamName);
 
