@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 exports.handler = async (event, context, callback) => {
   const divisionList = await fetch(
     'https://api.swebowl.se/api/v1/Match?APIKey=62fcl8gPUMXSQGW1t2Y8mc2zeTk97vbd&divisionId=8&seasonId=2020&matchStatus=',
