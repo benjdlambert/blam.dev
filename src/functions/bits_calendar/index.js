@@ -2,7 +2,6 @@
 const fetch = require('node-fetch');
 const cal = require('ical-generator');
 const moment = require('moment');
-const markdownTable = require('markdown-table');
 
 const normalize = (team) => {
   const withoutSpacesAndHyphens = team.replace(/-|\s/g, '');
