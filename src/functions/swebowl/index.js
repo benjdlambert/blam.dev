@@ -66,6 +66,7 @@ const buildCalendar = async (incomingTeamName) => {
   const calendar = cal({
     name: `${teamName}'s Bowling Calendar 2020`,
     timezone: 'Europe/Stockholm',
+    ttl: 60,
   });
 
   for (let i = 0; i < matches.length; i += 1) {
