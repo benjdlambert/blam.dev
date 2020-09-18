@@ -98,7 +98,7 @@ const buildCalendar = async (incomingTeamName) => {
         'Series',
         'BanP',
         'Plats',
-      ].map((thName) => `<tr><th>${thName}</th></tr>`);
+      ].map((thName) => `<th>${thName}</th>`);
 
       const tablePlayerListRows = playerList.map((p) => [
         p.player,
@@ -118,7 +118,9 @@ const buildCalendar = async (incomingTeamName) => {
       return /* html */ `
         <table>
           <thead>
+            <tr>
             ${tableHeadRows.join('')}
+            </tr>
           </thead>
           <tbody>
             ${tablePlayerList.join('')}
