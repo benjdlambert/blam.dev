@@ -133,8 +133,8 @@ const buildCalendar = async (incomingTeamName) => {
       : '';
 
     calendar.createEvent({
-      start: moment(match.matchDateTime),
-      end: moment(match.matchDateTime).add(3, 'hours'),
+      start: moment.utc(match.matchDateTime),
+      end: moment.utc(match.matchDateTime).add(3, 'hours'),
       id: match.matchId,
       summary: match.matchHasBeenPlayed
         ? `${match.matchVsTeams} (${match.matchVsResult})`
