@@ -85,9 +85,9 @@ const buildCalendar = async (incomingTeamName) => {
       const isHomeTeam =
         normalize(match.matchHomeTeamName) === normalizedTeamName;
 
-      const playerList =
-        isHomeTeam === matchResultsForTeams.playerListHome ||
-        matchResultsForTeams.playerListAway;
+      const playerList = isHomeTeam
+        ? matchResultsForTeams.playerListHome
+        : matchResultsForTeams.playerListAway;
 
       const tableHeadRows = [
         'name',
