@@ -134,7 +134,7 @@ const buildCalendar = async (incomingTeamName) => {
       end: moment(match.matchDateTime).add(3, 'hours'),
       id: match.matchId,
       summary: match.matchHasBeenPlayed
-        ? `${match.matchVsTeams} - ${match.matchVsResult}`
+        ? `${match.matchVsTeams} (${match.matchVsResult})`
         : match.matchVsTeams,
       description: `${
         match.matchHasBeenPlayed
