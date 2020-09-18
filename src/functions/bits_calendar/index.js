@@ -85,32 +85,41 @@ const buildCalendar = async (incomingTeamName) => {
         isHomeTeam === matchResultsForTeams.playerListHome ||
         matchResultsForTeams.playerListAway;
 
-      return (
-        `<table><thead><tr>${[
-          'name',
-          '1',
-          '2',
-          '3',
-          '4',
-          'Series',
-          'BanP',
-          'Plats',
-        ].map((t) => `<th>${t}</th>`)}</tr></thead>` +
-        `<tbody>${playerList
-          .map((p) => [
-            p.player,
-            p.result1,
-            p.result2,
-            p.result3,
-            p.result4,
-            p.totalSeries,
-            p.lanePoint,
-            p.place,
-          ])
-          .map(
-            (row) => `<tr>${row.map((deep) => `<td>${deep}</td>`)}</tr>`
-          )}</tbody></table>`
+      const tableHeadRows = [
+        'name',
+        '1',
+        '2',
+        '3',
+        '4',
+        'Series',
+        'BanP',
+        'Plats',
+      ].map((thName) => `<tr><th>${thName}</th></tr>`);
+
+      const tablePlayerListRows = playerList.map((p) => [
+        p.player,
+        p.result1,
+        p.result2,
+        p.result3,
+        p.result4,
+        p.totalSeries,
+        p.lanePoint,
+        p.place,
+      ]);
+
+      const tablePlayerList = tablePlayerListRows.map(
+        (row) => `<tr>${row.map((cell) => `<td>${cell}</td>`)}</tr>`
       );
+
+      return /* html */ `
+        <table>
+          <thead>
+            ${tableHeadRows.join('')}
+          </thead>
+          <tbody>
+            ${tablePlayerList.join('')}
+          </tbody>
+        </table>`;
     };
 
     const matchResultTable = match.matchHasBeenPlayed
