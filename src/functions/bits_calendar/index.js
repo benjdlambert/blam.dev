@@ -140,6 +140,13 @@ const buildCalendar = async (incomingTeamName) => {
       }\n<a href="${
         match.matchHallOnlineScoringUrl
       }">Live Scoring Available Here</a>`,
+      htmlDescription: `${
+        match.matchHasBeenPlayed
+          ? `<b>${match.matchVsResult}</b>\n\n${matchResultTable}`
+          : match.matchOilPatternName
+      }\n<a href="${
+        match.matchHallOnlineScoringUrl
+      }">Live Scoring Available Here</a>`,
       location: match.matchHallName,
     });
   }
