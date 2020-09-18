@@ -133,6 +133,7 @@ const buildCalendar = async (incomingTeamName) => {
       : '';
 
     calendar.createEvent({
+      timezone: 'Europe/Stockholm',
       start: moment(match.matchDateTime).tz('Europe/Stockholm'),
       end: moment(match.matchDateTime).tz('Europe/Stockholm').add(3, 'hours'),
       id: match.matchId,
