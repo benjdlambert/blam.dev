@@ -63,7 +63,10 @@ const buildCalendar = async (incomingTeamName) => {
       ? matches[0].matchAwayTeamName
       : matches[0].matchHomeTeamName;
 
-  const calendar = cal({ name: `${teamName}'s Bowling Calendar 2020` });
+  const calendar = cal({
+    name: `${teamName}'s Bowling Calendar 2020`,
+    timezone: 'Europe/Stockholm',
+  });
 
   for (let i = 0; i < matches.length; i += 1) {
     const match = matches[i];
@@ -108,7 +111,7 @@ const buildCalendar = async (incomingTeamName) => {
       ]);
 
       const tablePlayerList = tablePlayerListRows.map(
-        (row) => `<tr>${row.map((cell) => `<td>${cell}</td>`)}</tr>`
+        (row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join('')}</tr>`
       );
 
       return /* html */ `
