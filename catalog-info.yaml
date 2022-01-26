@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: blam.dev
+  annotations:
+    github.com/project-slug: benjdlambert/blam.dev
+spec:
+  type: other
+  lifecycle: unknown
+  owner: asd
