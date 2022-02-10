@@ -77,7 +77,7 @@
     "moment": "^2.28.0",
     "netlify-cms-app": "^2.12.12",
     "node-fetch": "^2.6.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "normalize-scss": "^7.0.1",
     "prismjs": "^1.21.0",
     "react": "^16.13.1",
